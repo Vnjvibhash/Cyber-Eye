@@ -1,3 +1,4 @@
+import 'package:cybereye/models/onboarding_content.dart';
 import 'package:flutter/material.dart';
 import 'package:cybereye/screens/login_screen.dart';
 
@@ -11,33 +12,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // THEME UPDATE: Content updated to match the Cyber Eye app
-  final List<IntroPage> _pages = [
-    IntroPage(
-      title: 'Tweet Analyzer',
-      description:
-          'Understand Twitter users through comprehensive tweet evaluation.',
-      icon: '📊',
-    ),
-    IntroPage(
-      title: 'Credit Scoring',
-      description: 'Receive tailored credit scores for account authenticity.',
-      icon: '💳',
-    ),
-    IntroPage(
-      title: 'Safety Indicator',
-      description:
-          'Stay protected with instant risk assessments and account safety indicators.',
-      icon: '🛡️',
-    ),
-    IntroPage(
-      title: 'Your Privacy First',
-      description:
-          'No cloud. No tracking. Your data stays encrypted and offline — always.',
-      icon: '🔐',
-    ),
-  ];
-
   void _navigateToLogin() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => const LoginScreen()),
@@ -46,7 +20,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // THEME UPDATE: Removed decorated Container. Scaffold now uses theme background.
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -59,9 +32,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     _currentPage = index;
                   });
                 },
-                itemCount: _pages.length,
+                itemCount: pages.length,
                 itemBuilder: (context, index) {
-                  return _buildPage(_pages[index]);
+                  return _buildPage(pages[index]);
                 },
               ),
             ),
@@ -72,7 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildPage(IntroPage page) {
+  Widget _buildPage(OnboardingContent page) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0),
       child: Column(
@@ -82,7 +55,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              // THEME UPDATE: Using surface color with a subtle primary border
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(24),
               border: Border.all(
@@ -97,7 +69,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 48),
           Text(
             page.title,
-            // THEME UPDATE: Text styles now fully inherit from the theme
             style: Theme.of(
               context,
             ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -119,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildBottomSection() {
-    bool isLastPage = _currentPage == _pages.length - 1;
+    bool isLastPage = _currentPage == pages.length - 1;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
@@ -128,14 +99,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-              _pages.length,
+              pages.length,
               (index) => AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 width: _currentPage == index ? 24 : 8,
                 height: 8,
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
-                  // THEME UPDATE: Indicator colors are from theme
                   color: _currentPage == index
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.primary.withOpacity(0.3),
@@ -148,17 +118,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Show skip button only if not on the last page
               if (!isLastPage)
                 TextButton(
-                  onPressed: _navigateToLogin, // Navigation added
+                  onPressed: _navigateToLogin,
                   child: const Text('Skip'),
                 )
               else
-                // Empty container to keep the "Get Started" button on the right
                 const SizedBox(width: 60),
 
-              // THEME UPDATE: ElevatedButton styling is removed to use the global theme
               ElevatedButton(
                 onPressed: () {
                   if (!isLastPage) {
@@ -167,7 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.easeInOut,
                     );
                   } else {
-                    _navigateToLogin(); // Navigation added
+                    _navigateToLogin();
                   }
                 },
                 child: Text(isLastPage ? 'Get Started' : 'Next'),
@@ -180,14 +147,3 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-class IntroPage {
-  final String title;
-  final String description;
-  final String icon;
-
-  IntroPage({
-    required this.title,
-    required this.description,
-    required this.icon,
-  });
-}

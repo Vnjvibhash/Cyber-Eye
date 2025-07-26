@@ -29,7 +29,7 @@ final List<ReportItem> reportItems = [
     name: 'alice16#4512',
     date: '13 March 2020, 11:10 AM',
     percentage: '78.8%',
-    icon: Icons.favorite_border, // Using a different icon for variety
+    icon: Icons.favorite_border,
     iconBgColor: Colors.pink.shade200,
   ),
   ReportItem(
