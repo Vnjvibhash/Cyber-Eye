@@ -15,7 +15,6 @@ A showcase of the key screens within the Cyber Eye application.
 <div style="display: grid; grid-template-columns: repeat(3, 200px); grid-template-rows: repeat(2, 50px); gap: 10px;">
     <img src="assets/screenshots/Screenshot_1.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
     <img src="assets/screenshots/Screenshot_2.1.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
-    <img src="assets/screenshots/Screenshot_2.2.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
     <img src="assets/screenshots/Screenshot_2.3.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
     <img src="assets/screenshots/Screenshot_3.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
     <img src="assets/screenshots/Screenshot_4.1.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
