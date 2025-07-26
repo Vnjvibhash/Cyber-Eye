@@ -1,7 +1,7 @@
 # Cyber Eye 👁️
 
 <p align="center">
-  <img src="assets/images/logo.png?raw=true" alt="Cyber Eye Logo" height="100"/>
+  <img src="assets/images/logo.png?raw=true" alt="Cyber Eye Logo" height="400"/>
 </p>
 
 A sleek, modern Flutter application designed for digital identity analysis and safety scoring. Cyber Eye provides users with tools to evaluate online profiles, assess credit scores, and stay safe online, all wrapped in a beautiful, responsive UI with light and dark modes.
