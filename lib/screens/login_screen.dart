@@ -47,7 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('is_logged_in_cyber_eye', true);
       print('Login successful and session saved.');
-      
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainScreen()),
