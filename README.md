@@ -12,21 +12,17 @@ A sleek, modern Flutter application designed for digital identity analysis and s
 
 A showcase of the key screens within the Cyber Eye application.
 
-| Splash Screen                                      | Onboarding Screen                                          | Login Screen                                       |
-| -------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------- |
-| <!-- Add your splash screen screenshot here -->     | <!-- Add your onboarding screen screenshot here -->         | <!-- Add your login screen screenshot here -->      |
-| <img src="" width="250">                            | <img src="" width="250">                                   | <img src="" width="250">                            |
-
-| Forgot Password                                    | Home Screen                                                | Reports Screen                                     |
-| -------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------- |
-| <!-- Add your forgot password screenshot here -->   | <!-- Add your home screen screenshot here -->               | <!-- Add your reports screen screenshot here -->   |
-| <img src="" width="250">                            | <img src="" width="250">                                   | <img src="" width="250">                            |
-
-| Profile Screen                                     | Navigation Drawer                                          |
-| -------------------------------------------------- | ---------------------------------------------------------- |
-| <!-- Add your profile screen screenshot here -->    | <!-- Add your navigation drawer screenshot here -->         |
-| <img src="" width="250">                            | <img src="" width="250">                                   |
-
+<div style="display: grid; grid-template-columns: repeat(3, 200px); grid-template-rows: repeat(2, 50px); gap: 10px;">
+    <img src="assets/screenshots/Screenshot_1.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_2.1.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_2.2.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_2.3.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_3.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_4.1.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_4.2.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_5.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+    <img src="assets/screenshots/Screenshot_6.png" alt="Screenshot 1" style="width: 200px; height: 500px; object-fit: cover;">
+</div>
 
 ---
 
