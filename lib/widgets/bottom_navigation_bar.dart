@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:cybereye/screens/home_screen.dart';
 import 'package:cybereye/screens/reports_screen.dart';
 import 'package:cybereye/screens/profile_screen.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:cybereye/widgets/custom_drawer.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -13,21 +14,23 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  static const List<Widget> _screens = <Widget>[
-    HomeScreen(),
-    ReportsScreen(),
-    ProfileScreen(),
+  late final List<Widget> _screens = [
+    HomeScreen(scaffoldKey: _scaffoldKey),
+    ReportsScreen(scaffoldKey: _scaffoldKey),
+    ProfileScreen(scaffoldKey: _scaffoldKey),
   ];
 
-  void _onItemTapped(int index) {
+  // --- NEW METHOD TO HANDLE NAVIGATION ---
+  void _handleNavigation(int index) {
+    // If the drawer is open, close it first
+    if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
+      Navigator.pop(context);
+    }
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-    Color _iconColor(int index) {
-    return _selectedIndex == index ? Colors.white : Colors.white;
   }
 
   @override
@@ -35,20 +38,25 @@ class _MainScreenState extends State<MainScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: CustomDrawer(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _handleNavigation,
+      ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: const Color(0xFF3A3A3A).withAlpha(20),
+        backgroundColor: Colors.transparent,
         color: theme.colorScheme.primary,
         buttonBackgroundColor: theme.colorScheme.secondary,
         height: 60,
-        items: <Widget>[
-          Icon(Icons.home, size: 30, color: _iconColor(0)),
-          Icon(Icons.edit_document, size: 30, color: _iconColor(1)),
-          Icon(Icons.person, size: 30, color: _iconColor(2)),
+        items: const <Widget>[
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.edit_document, size: 30, color: Colors.white),
+          Icon(Icons.person, size: 30, color: Colors.white),
         ],
         animationDuration: const Duration(milliseconds: 300),
         animationCurve: Curves.easeInOut,
-        onTap: _onItemTapped,
+        onTap: _handleNavigation, // Also use the new handler here
         index: _selectedIndex,
       ),
     );

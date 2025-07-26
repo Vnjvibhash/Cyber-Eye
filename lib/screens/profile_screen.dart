@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cybereye/widgets/profile_header_painter.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+    final GlobalKey<ScaffoldState> scaffoldKey;
+  const ProfileScreen({super.key, required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF3A3A3A).withAlpha(20),
+      backgroundColor: theme.colorScheme.background,
       body: Stack(
         children: [
           Positioned(
@@ -24,8 +25,6 @@ class ProfileScreen extends StatelessWidget {
               painter: ProfileHeaderPainter(theme),
             ),
           ),
-
-          // Main Content
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -34,21 +33,27 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    // Back Button
-                    const Icon(Icons.arrow_back, color: Colors.white, size: 28),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        scaffoldKey.currentState?.openDrawer();
+                      },
+                    ),
                     const SizedBox(height: 20),
 
-                    // Profile Picture
                     Center(child: _buildProfilePicture()),
                     const SizedBox(height: 40),
 
-                    // Form Fields
                     CustomInputField(label: 'Username', value: 'Vivekajee'),
                     CustomInputField(label: 'First name', value: 'Vivek'),
                     CustomInputField(label: 'Last name', value: 'Jee'),
                     CustomInputField(
                       label: 'Date of Birth',
-                      value: '10-01-2002',
+                      value: '06-12-1996',
                       showCheckIcon: false,
                     ),
                     const SizedBox(height: 40),

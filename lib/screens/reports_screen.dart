@@ -4,7 +4,8 @@ import 'package:cybereye/widgets/report_list_item.dart';
 import 'package:cybereye/widgets/custom_search_bar.dart';
 
 class ReportsScreen extends StatefulWidget {
-  const ReportsScreen({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const ReportsScreen({super.key, required this.scaffoldKey});
 
   @override
   State<ReportsScreen> createState() => _ReportsScreenState();
@@ -46,7 +47,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
       backgroundColor: pageColor,
       body: Stack(
         children: [
-          // Top Header Section (remains the same)
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -54,15 +54,24 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.arrow_back, color: Colors.white, size: 28),
-                      Text(
+                      IconButton(
+                        icon: const Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          widget.scaffoldKey.currentState?.openDrawer();
+                        },
+                      ),
+                      const Text(
                         'Check Credit',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      SizedBox(width: 28),
+                      const SizedBox(width: 48),
                     ],
                   ),
                   const SizedBox(height: 40),
@@ -94,7 +103,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
               ),
             ),
           ),
-
           // Bottom Sheet with List
           Positioned(
             top: size.height * 0.4,

@@ -3,17 +3,17 @@ import 'package:cybereye/widgets/credit_score_chart.dart';
 import 'package:cybereye/widgets/home_header_clipper.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const HomeScreen({super.key, required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFF3A3A3A).withAlpha(20),
+      backgroundColor: theme.colorScheme.background,
       body: Stack(
         children: [
-          // The blue header with its custom shape
           ClipPath(
             clipper: HomeHeaderClipper(),
             child: Container(
@@ -22,14 +22,12 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          // The main content of the page
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // --- Header Row ---
                   _buildHeader(),
                   const SizedBox(height: 20),
                   Text(
@@ -40,12 +38,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-
-                  // --- Credit Score Card ---
                   _buildCreditScoreCard(theme),
                   const SizedBox(height: 20),
-
-                  // --- Bottom Decorative Card ---
                   _buildBottomCard(theme),
                 ],
               ),
@@ -60,12 +54,16 @@ class HomeScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Icon(Icons.menu, color: Colors.white, size: 30),
+        IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white, size: 30),
+          onPressed: () {
+            scaffoldKey.currentState?.openDrawer();
+          },
+        ),
         Stack(
           children: [
             const CircleAvatar(
               radius: 25,
-              // You can use a real image here
               backgroundImage: NetworkImage('https://res.cloudinary.com/datxdx0wi/image/upload/v1750217121/pjlbiwax6pwd1obiiwpt.jpg'),
             ),
             Positioned(
@@ -125,7 +123,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          // The bar chart
           const SizedBox(height: 100, child: CreditScoreChart()),
         ],
       ),

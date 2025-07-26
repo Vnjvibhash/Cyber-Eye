@@ -2,6 +2,7 @@ import 'package:cybereye/widgets/bottom_navigation_bar.dart';
 import 'package:cybereye/widgets/custom_button.dart';
 import 'package:cybereye/widgets/login_header_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,12 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _login() {
+  void _login() async {
     if (_formKey.currentState?.validate() ?? false) {
-      print('Login successful');
-      Navigator.of(
-        context,
-      ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('is_logged_in_cyber_eye', true);
+      print('Login successful and session saved.');
+      
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const MainScreen()),
+        );
+      }
     }
   }
 
@@ -85,8 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 16),
                           Text(
                             'Welcome\nBack',
-                            textAlign:
-                                TextAlign.left,
+                            textAlign: TextAlign.left,
                             style: theme.textTheme.headlineLarge?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
@@ -186,6 +191,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }
-

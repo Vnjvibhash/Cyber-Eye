@@ -1,4 +1,5 @@
 import 'package:cybereye/screens/login_screen.dart';
+import 'package:cybereye/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cybereye/screens/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,20 +43,27 @@ class _SplashScreenState extends State<SplashScreen>
 
     final prefs = await SharedPreferences.getInstance();
     final isFirstTime = prefs.getBool('is_first_time_cyber_eye') ?? true;
+    final isLoggedIn = prefs.getBool('is_logged_in_cyber_eye') ?? false;
 
-    if (isFirstTime) {
-      await prefs.setBool('is_first_time_cyber_eye', false);
+    if (isLoggedIn) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+        MaterialPageRoute(builder: (context) => MainScreen()),
       );
     } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
-        ),
-      );
+      if (isFirstTime) {
+        await prefs.setBool('is_first_time_cyber_eye', false);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      }
     }
   }
+
+  
 
   @override
   void dispose() {
